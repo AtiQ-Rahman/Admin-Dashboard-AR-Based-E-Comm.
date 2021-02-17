@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin Dashboard - Dashboard</title>
+    <title>Admin Dashboard - Orders</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -17,7 +17,8 @@
 
     <!-- Custom styles for this template-->
     <link href="css/admin-dashboard.min.css" rel="stylesheet">
-
+    <link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="css/users.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -97,9 +98,30 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
+
+
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
 
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
@@ -165,14 +187,7 @@
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile
                                 </a>
-                                <!-- <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a> -->
+
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout
@@ -189,103 +204,36 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                    </div>
-                    <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-                    <!-- Content Row -->
-                    <div class="row">
+                    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
 
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                <p>Total Orders</p>
-                                            </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                <p style="display: inline; " id="total_orders">1,000</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Orders Table</h6>
                         </div>
+                        <div class="card-body">
+                            <div class="col-sm-12 table-responsive">
+                                <table class="table table-bordered table-users" id="OrdersTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Image</th>
+                                            <th>ID</th>
+                                            <th>Item Name</th>
+                                            <th>Type</th>
+                                            <th>Color</th>
+                                            <th>Price</th>
+                                            <th>Order Time</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
 
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Total Sales</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><b>৳  </b>
-                                                <p style="display: inline;" id="total_price">215,000</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
 
-                                            <i class="fas fa-money-bill fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
+                                </table>
+                                <!-- <button style="background-color: blue;height:40px;width:120px;" class="btn btn-add">Add User</button> -->
                             </div>
-                        </div>
 
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-info shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Users
-                                            </div>
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                                        <p style="display: inline;" id="total_users">200</p>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-users fas-2x text-gray-300"></i>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Pending Requests Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Total Products</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                <p style="display: inline;" id="total_products">2005</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fab fa-product-hunt fas-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
-
-                    <!-- Content Row -->
 
 
                 </div>
@@ -293,7 +241,6 @@
 
             </div>
             <!-- End of Main Content -->
-
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
@@ -309,6 +256,7 @@
 
     </div>
     <!-- End of Page Wrapper -->
+
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
@@ -334,9 +282,91 @@
         </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
+
+    <!-- Edit Modal -->
+    <!-- Edit Modal -->
+    <div class="edit-modal modal-wrapper">
+        <div class="modal modal-show" style="height:500px;background-color: black;">
+            <div class="modal-header">
+                <h3>Edit User</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form" autocomplete="off">
+                    <input type="text" name="product_name" placeholder="Product Name">
+
+                    <label for="type" style="color: white;float: left;margin-right: 5px;">Product Type </label>
+                    <select name="product_type" style="float: left;">
+                    <option value="Gents">Gents</option>
+                    <option value="Ladies">Ladies</option>
+                    <option value="Children">Children</option>
+            </select> <br>
+
+
+                    <label for="color" style="color: white;float: left;margin-left: 10px;margin-right: 5px;">Color </label>
+                    <select name="product_color" style="float: left;">
+                <option value="White">White</option>
+                <option value="Black">Black</option>
+                <option value="Red">Red</option>
+                <option value="Brown">Brown</option>
+                <option value="Grey">Grey</option>
+                <option value="Colourful">Colourful</option>
+            </select>
+
+                    <!--
+          <input type="text" name="user_type" placeholder="User Type">
+        -->
+                    <input type="text" name="product_price" placeholder="Price">
+                    <button class="btn btn-modal">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-firestore.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "AIzaSyCc0rlBmYYiFcQZLUpZR4OClB9d05jwOc4",
+            authDomain: "ar-based-e-commerce.firebaseapp.com",
+            projectId: "ar-based-e-commerce",
+            storageBucket: "ar-based-e-commerce.appspot.com",
+            messagingSenderId: "1048491425341",
+            appId: "1:1048491425341:web:b173ca8d668b374d4d7454",
+            measurementId: "G-PSS4Q56LYB"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        $(document).ready(function() {
+
+            $("#logOUtBtn").click(function() {
+
+                firebase.auth().signOut().then(function() {
+                    //alert('Signed Out');
+                    window.location.href = "signIn.html";
+
+                }).catch(function(error) {
+                    // An error happened.
+
+                });
+
+            });
+        });
+    </script>
+
+    <!-- Bootstrap core JavaScript-->
+
 
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -345,16 +375,13 @@
     <script src="js/admin-dashboard.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
 
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-firestore.js"></script>
-
-
-    <script src="js/index.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="js/demo/datatables-demo.js"></script>
+    <script src="js/orders.js"></script>
 
 
 </body>

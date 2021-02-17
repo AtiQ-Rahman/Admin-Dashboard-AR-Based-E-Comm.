@@ -9,29 +9,28 @@ const editModalForm = document.querySelector('.edit-modal .form');
 
 const btnAdd = document.querySelector('.btn-add');
 
-const tableAllProducts = document.querySelector('.table-AllProducts');
 
+// Create element and render Orders
+var table = $('#OrdersTable').DataTable();
 let id;
-
-// Create element and render AllProducts
-var table = $('#ProductsTable').DataTable();
-
 
 const renderUser = doc => {
 
     var imagepath = '../img/ar.png';
+    var date = doc.data().order_time.toDate().toUTCString();
 
-    if (doc.data().compress_image_path !== null && doc.data().compress_image_path !== '') {
-        imagepath = doc.data().compress_image_path;
+    if (doc.data().img_path !== null && doc.data().img_path !== '') {
+        imagepath = doc.data().img_path;
     }
     table.row.add($(
         "<tr  data-id=" + doc.id + ">" +
         "<td > " + "<img width='50' height='50' src=" + imagepath + ">" + "</td>" +
-        "<td >" + doc.data().alternative_id + "</td>" +
-        "<td>" + doc.data().name + "</td>" +
-        "<td>" + doc.data().type + "</td>" +
-        "<td>" + doc.data().color + "</td>" +
-        "<td>" + doc.data().price + "</td>" +
+        "<td >" + doc.data().order_id + "</td>" +
+        "<td>" + doc.data().product_name + "</td>" +
+        "<td>" + doc.data().product_type + "</td>" +
+        "<td>" + doc.data().product_color + "</td>" +
+        "<td>" + doc.data().product_price + "</td>" +
+        "<td>" + date + "</td>" +
         "<td>" +
         "<button class='btn btn-edit'>Edit</button>" +
         "<button class='btn btn-delete'>Delete</button>" +
@@ -46,10 +45,10 @@ const renderUser = doc => {
             editModal.classList.add('modal-show');
             //alert("i am called");
             id = doc.id;
-            editModalForm.name.value = doc.data().name;
-            editModalForm.type.value = doc.data().type;
-            editModalForm.color.value = doc.data().color;
-            editModalForm.price.value = doc.data().price;
+            editModalForm.product_name.value = doc.data().product_name;
+            editModalForm.product_type.value = doc.data().product_type;
+            editModalForm.product_color.value = doc.data().product_color;
+            editModalForm.product_price.value = doc.data().product_price;
 
         });
     }
@@ -58,7 +57,7 @@ const renderUser = doc => {
     const btnDelete = document.querySelector(`[data-id='${doc.id}'] .btn-delete`);
     if (btnDelete != null) {
         btnDelete.addEventListener('click', () => {
-            db.collection('AllProducts').doc(doc.id).delete().then(() => {
+            db.collection('Orders').doc(doc.id).delete().then(() => {
                 console.log('Document succesfully deleted!');
             }).catch(err => {
                 console.log('Error removing document', err);
@@ -91,8 +90,8 @@ window.addEventListener('click', e => {
     }
 });
 
-// Get all AllProducts
-db.collection('AllProducts').get().then(querySnapshot => {
+// Get all Orders
+db.collection('Orders').get().then(querySnapshot => {
     querySnapshot.forEach(doc => {
         //renderUser(doc);
         console.log(doc.data());
@@ -102,7 +101,7 @@ db.collection('AllProducts').get().then(querySnapshot => {
 
 
 // Real time listener
-db.collection('AllProducts').onSnapshot(snapshot => {
+db.collection('Orders').onSnapshot(snapshot => {
     snapshot.docChanges().forEach(change => {
         if (change.type === 'added') {
             renderUser(change.doc);
@@ -125,7 +124,7 @@ db.collection('AllProducts').onSnapshot(snapshot => {
 // addModalForm.addEventListener('submit', e => {
 //   e.preventDefault();
 
-//   var docRef=db.collection('AllProducts').doc();
+//   var docRef=db.collection('Orders').doc();
 //   var doc_id=docRef.id;
 //   docRef.set({
 //     name: addModalForm.name.value,
@@ -142,11 +141,11 @@ db.collection('AllProducts').onSnapshot(snapshot => {
 // Click submit in edit modal
 editModalForm.addEventListener('submit', e => {
     e.preventDefault();
-    db.collection('AllProducts').doc(id).update({
-        name: editModalForm.name.value,
-        color: editModalForm.color.value,
-        type: editModalForm.type.value,
-        price: editModalForm.price.value,
+    db.collection('Orders').doc(id).update({
+        product_name: editModalForm.product_name.value,
+        product_color: editModalForm.product_color.value,
+        product_type: editModalForm.product_type.value,
+        product_price: editModalForm.product_price.value,
 
     });
     editModal.classList.remove('modal-show');

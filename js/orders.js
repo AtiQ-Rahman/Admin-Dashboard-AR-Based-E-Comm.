@@ -13,7 +13,14 @@ const btnAdd = document.querySelector('.btn-add');
 // Create element and render Orders
 var table = $('#OrdersTable').DataTable();
 let id;
-
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+    } else {
+        //alert('Please Log In');
+        window.location.href="signIn.html" ;
+    }
+  });
 const renderUser = doc => {
 
     var imagepath = '../img/ar.png';

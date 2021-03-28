@@ -13,6 +13,14 @@ const tableAllProducts = document.querySelector('.table-AllProducts');
 
 let id;
 
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+    } else {
+        alert('Please Log In');
+        window.location.href="signIn.html" ;
+    }
+  });
 // Create element and render AllProducts
 var table = $('#ProductsTable').DataTable();
 

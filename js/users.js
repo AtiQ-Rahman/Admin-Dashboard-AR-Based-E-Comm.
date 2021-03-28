@@ -12,7 +12,14 @@ const btnAdd = document.querySelector('.btn-add');
 const tableUsers = document.querySelector('.table-users');
 
 let id;
-
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+  } else {
+      //alert('Please Log In');
+      window.location.href="signIn.html" ;
+  }
+});
 // Create element and render users
 var table= $('#UsersTable').DataTable( );
 
